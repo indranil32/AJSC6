@@ -6,11 +6,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<requiredProperties>
 		<requiredProperty key="context-root" />
-		<requiredProperty key="docker-registry" />
 		<requiredProperty key="kube-namespace" />
 		<requiredProperty key="service-account" />
 		<requiredProperty key="service-replicas" />
-		<requiredProperty key="docker-namespace" />
 	</requiredProperties>
 	<fileSets>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
