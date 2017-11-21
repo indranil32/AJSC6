@@ -48,11 +48,9 @@
 		<icd.file>service.json</icd.file>
 		<icd.package>${package}.service.rs</icd.package>
 		<java.version>1.8</java.version>
-		<docker.registry>${docker-registry}</docker.registry>
 		<build.number>local</build.number>
 		<kube.namespace>${kube-namespace}</kube.namespace>
 		<service.account>${service-account}</service.account>
-		<docker.namespace>${docker-namespace}</docker.namespace>
 		<sdk.java.rest>6.2.0.4</sdk.java.rest>
 	</properties>
 
@@ -109,10 +107,9 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.11</version>
 				<configuration>
-					<imageName>${docker.registry}/${docker.namespace}/${artifactId}</imageName>
+					<imageName>${artifactId}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<serverId>docker-hub</serverId>
-					<registryUrl>https://${docker.registry}</registryUrl>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 						<imageTag>latest</imageTag>
