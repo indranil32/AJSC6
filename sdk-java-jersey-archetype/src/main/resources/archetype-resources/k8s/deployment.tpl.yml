@@ -8,7 +8,7 @@ metadata:
     app: "${APP_NAME}"
     version: "${VERSION:-0.0.1}"    
 spec:
-  replicas: 2
+  replicas: ${REPLICA_COUNT}
   selector:
     matchLabels:
       app: "${APP_NAME}"

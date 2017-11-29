@@ -70,9 +70,9 @@ EOF
 
 PREFIX=${K8S_CTX}-${TARGET_ENV}-${APP_NS}-${APP_NAME}
 
-generate ${SCRIPT_DIR}/cfgmap.tpl.yml ${SCRIPT_DIR}/.${PREFIX}-cfgmap.yml
-generate ${SCRIPT_DIR}/deployment.tpl.yml ${SCRIPT_DIR}/.${PREFIX}-deployment.yml
-generate ${SCRIPT_DIR}/svc.tpl.yml ${SCRIPT_DIR}/.${PREFIX}-svc.yml
+generate ${SCRIPT_DIR}/cfgmap.tpl.yml ${SCRIPT_DIR}/${PREFIX}-cfgmap.yml
+generate ${SCRIPT_DIR}/deployment.tpl.yml ${SCRIPT_DIR}/${PREFIX}-deployment.yml
+generate ${SCRIPT_DIR}/svc.tpl.yml ${SCRIPT_DIR}/${PREFIX}-svc.yml
 
 
 log "================================================================"
@@ -85,24 +85,21 @@ log "================================================================"
 
 
 # configmap
-${KUBECTL} apply \
-  --namespace ${APP_NS} \
-  --context ${K8S_CTX} ${KUBECTL_OPTS} \
-  -f ${SCRIPT_DIR}/.${PREFIX}-cfgmap.yml
+${KUBECTL} apply   ${KUBECTL_OPTS}  ${KUBECTL_OPTS} -f ${SCRIPT_DIR}/${PREFIX}-cfgmap.yml
 
 # svc
 ${KUBECTL} apply \
-  --namespace ${APP_NS} --context ${K8S_CTX} ${KUBECTL_OPTS} \
-  -f ${SCRIPT_DIR}/.${PREFIX}-svc.yml
+  --namespace ${APP_NS}  ${KUBECTL_OPTS} \
+  -f ${SCRIPT_DIR}/${PREFIX}-svc.yml
 
 # trigger deployment
 ${KUBECTL} apply \
-  --namespace ${APP_NS} --context ${K8S_CTX} ${KUBECTL_OPTS} \
-  -f ${SCRIPT_DIR}/.${PREFIX}-deployment.yml
+  --namespace ${APP_NS}  ${KUBECTL_OPTS} \
+  -f ${SCRIPT_DIR}/${PREFIX}-deployment.yml
 
 
 ${KUBECTL} rollout status deployment/${APP_NAME} \
-  --namespace ${APP_NS} --context ${K8S_CTX} ${KUBECTL_OPTS}
+  --namespace ${APP_NS}  ${KUBECTL_OPTS}
 if [ $? -ne 0 ]; then
     log "================================================================"
     log " Failure - ${APP_NAME} Deployment Failed!!"

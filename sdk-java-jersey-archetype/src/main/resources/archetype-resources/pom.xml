@@ -40,7 +40,7 @@
 	<parent>
 		<groupId>com.att.ajsc</groupId>
 		<artifactId>sdk-java-starter-parent</artifactId>
-		<version>6.1.0.4</version>
+		<version>6.1.0.4-oss</version>
 	</parent>
 
 	<properties>
@@ -50,8 +50,8 @@
 		<java.version>1.8</java.version>
 		<build.number>local</build.number>
 		<kube.namespace>${kube-namespace}</kube.namespace>
-		<service.account>${service-account}</service.account>
-		<sdk.java.rest>6.2.0.4</sdk.java.rest>
+		<service.account>default</service.account>
+		<sdk.java.rest>6.2.0.4-oss</sdk.java.rest>
 	</properties>
 
 	<developers>
@@ -102,12 +102,19 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<groupId>org.codehaus.mojo</groupId>
 			</plugin>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-gpg-plugin</artifactId>
+		<configuration>
+			<skip>true</skip>
+		</configuration>
+	</plugin>
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.11</version>
 				<configuration>
-					<imageName>${artifactId}</imageName>
+					<imageName>cdposs/${artifactId}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<serverId>docker-hub</serverId>
 					<imageTags>
